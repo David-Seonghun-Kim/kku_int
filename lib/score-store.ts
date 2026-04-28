@@ -1,4 +1,5 @@
 const SCORE_KEY = "kku_int_scores";
+const SURVEY_KEY = "kku_int_survey";
 
 export interface Scores {
   game1: number | null;
@@ -32,4 +33,24 @@ export function getTotalScore(): number {
 export function clearScores(): void {
   if (typeof window === "undefined") return;
   sessionStorage.removeItem(SCORE_KEY);
+}
+
+// ── 설문 결과 (유형 인덱스 0~4) ──────────────────────────────
+
+export function saveSurveyResult(typeIndex: number): void {
+  if (typeof window === "undefined") return;
+  sessionStorage.setItem(SURVEY_KEY, String(typeIndex));
+}
+
+export function getSurveyResult(): number | null {
+  if (typeof window === "undefined") return null;
+  const raw = sessionStorage.getItem(SURVEY_KEY);
+  if (raw === null) return null;
+  const n = parseInt(raw, 10);
+  return isNaN(n) ? null : n;
+}
+
+export function clearSurveyResult(): void {
+  if (typeof window === "undefined") return;
+  sessionStorage.removeItem(SURVEY_KEY);
 }

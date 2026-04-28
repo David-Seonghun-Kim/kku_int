@@ -6,7 +6,8 @@ interface GameCardProps {
   title: string;
   description: string;
   completed: boolean;
-  score: number | null;
+  score?: number | null;
+  completedLabel?: string; // 점수 대신 표시할 커스텀 뱃지 텍스트
   color: string;
 }
 
@@ -17,8 +18,11 @@ export default function GameCard({
   description,
   completed,
   score,
+  completedLabel,
   color,
 }: GameCardProps) {
+  const badge = completedLabel ?? (score != null ? `완료 ${score}점` : "완료");
+
   return (
     <Link href={href} className="block">
       <div
@@ -28,7 +32,7 @@ export default function GameCard({
       >
         {completed && (
           <div className="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-            완료 {score}점
+            {badge}
           </div>
         )}
         <div className="text-4xl mb-3">{icon}</div>

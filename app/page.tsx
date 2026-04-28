@@ -3,14 +3,17 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import GameCard from "@/components/GameCard";
-import { getScores, clearScores, type Scores } from "@/lib/score-store";
+import { getScores, clearScores, getSurveyResult, clearSurveyResult, type Scores } from "@/lib/score-store";
+import { surveyTypes } from "@/data/survey-questions";
 
 export default function Home() {
   const router = useRouter();
   const [scores, setScores] = useState<Scores>({ game1: null, game2: null, game3: null });
+  const [surveyResult, setSurveyResult] = useState<number | null>(null);
 
   useEffect(() => {
     setScores(getScores());
+    setSurveyResult(getSurveyResult());
   }, []);
 
   const allCompleted =
@@ -18,7 +21,9 @@ export default function Home() {
 
   function handleReset() {
     clearScores();
+    clearSurveyResult();
     setScores({ game1: null, game2: null, game3: null });
+    setSurveyResult(null);
   }
 
   return (
@@ -64,6 +69,15 @@ export default function Home() {
           completed={scores.game3 !== null}
           score={scores.game3}
           color="border-purple-300 bg-purple-50 hover:bg-purple-100"
+        />
+        <GameCard
+          href="/survey"
+          icon="🐱"
+          title="나는 어떤 유형?"
+          description="15개 질문으로 나에게 맞는 문헌정보학 유형 찾기"
+          completed={surveyResult !== null}
+          completedLabel={surveyResult !== null ? surveyTypes[surveyResult].name : undefined}
+          color="border-orange-300 bg-orange-50 hover:bg-orange-100"
         />
       </div>
 
