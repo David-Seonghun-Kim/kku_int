@@ -44,6 +44,15 @@ export default function Home() {
       {/* 게임 카드 목록 */}
       <div className="space-y-4 mb-8">
         <GameCard
+          href="/survey"
+          icon="🐱"
+          title="나에게 딱 맞는 전공은?"
+          description="15개의 질문으로 내 성격에 맞는 전공 찾기"
+          completed={surveyResult !== null}
+          completedLabel={surveyResult !== null ? surveyTypes[surveyResult].name : undefined}
+          color="border-orange-300 bg-orange-50 hover:bg-orange-100"
+        />
+        <GameCard
           href="/game1"
           icon="❓"
           title="O/X 퀴즈"
@@ -70,15 +79,6 @@ export default function Home() {
           score={scores.game3}
           color="border-purple-300 bg-purple-50 hover:bg-purple-100"
         />
-        <GameCard
-          href="/survey"
-          icon="🐱"
-          title="나는 어떤 유형?"
-          description="15개 질문으로 나에게 맞는 문헌정보학 유형 찾기"
-          completed={surveyResult !== null}
-          completedLabel={surveyResult !== null ? surveyTypes[surveyResult].name : undefined}
-          color="border-orange-300 bg-orange-50 hover:bg-orange-100"
-        />
       </div>
 
       {/* 결과 보기 / 초기화 버튼 */}
@@ -99,7 +99,7 @@ export default function Home() {
         </div>
       ) : (
         <p className="text-center text-sm text-gray-400">
-          3개 게임을 모두 완료하면 최종 결과를 확인할 수 있어요!
+          설문조사와 3개 게임을 모두 완료하면 최종 결과를 확인할 수 있어요!
         </p>
       )}
     </main>

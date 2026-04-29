@@ -63,7 +63,7 @@ export default function SurveyPage() {
         <p className="text-gray-500 text-center mb-6 leading-relaxed">
           15개의 질문에 솔직하게 답하면
           <br />
-          나에게 맞는 문헌정보학 유형을 알려드려요!
+          나에게 맞는 전공을 알려드려요!!!
         </p>
         <div className="w-full bg-blue-50 rounded-2xl p-4 mb-8 text-sm text-gray-600">
           <p className="font-semibold text-blue-800 mb-2">📋 안내</p>
